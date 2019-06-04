@@ -66,6 +66,10 @@ app.get('/' , (req, res) => {
   res.send('Live-Local App');
 });
 
+app.get('/map', (req, res) => {
+   res.render('map.ejs');
+  })
+
 app.get('/list', (req, res) => {
     Event.find( (error, allEvents)=>{
         // console.log(allItems)

@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./main.css">
 </head>
 <body>
         <nav>
@@ -14,21 +15,22 @@
         </nav>
     <div class="container">
         <h1>Local Events</h1>
+        <div class="row">
         <% event.forEach((data, index) => { %>    
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                       <h5 class="card-title"><%=data.title%></h5>
                       <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <h4><%=data.date%></h4>
-                      <h4><%=data.time%></h4>
-                      <h4><%=data.location%></h4>
-                      <h5><%=data.details%></h5>
+                      <h4><%=data.date%></h6>
+                      <h6><%=data.time%></h6>
+                      <h6><%=data.location%></h6>
+                      <p><%=data.details%></p>
                       <a href="#" class="card-link">Card link</a>
                       <a href="#" class="card-link">Another link</a>
                     </div>
                   </div>
                   <%})%>
-  
+                </div>
     </div>
 </body>
 </html>
