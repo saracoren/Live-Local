@@ -27,14 +27,44 @@
 
     </div>
     <div class = "locations">
-        <li class="testing">Testing</li>
-        <li class="lat"><%=mapLocations[0].lat%></li>
-        <li class="lng"><%=mapLocations[0].lng%></li>
+            <table style="width:100%">
+                <% locations.forEach((data, index) => { %>    
+                    <tr>
+                      <td class="lat"><%=data.lat_in%></td>
+                      <td class="lng"><%=data.lng_in%></td> 
+                    </tr>
+                <%})%>
+            </table>     
+
     </div>
  
 
 <script>
+//    $latObj = $('.lat')
+//    console.log($latObj)
+//    console.log(typeof $latObj)
+//    console.log($latObj)
+//   $latObj[5].forEach(function(element) {
+//   console.log(element);
+// });
+function grabData() {
+    const locationsArray = []
+    $('tr').each(function(index){
+    console.log(index + ' lat: ' + $('.lat').eq(index).text())
+    console.log(index + ' lng:' + $('.lng').eq(index).text())
+    const latLngObj = {
+        lat: Number($('.lat').eq(index).text()),
+        lng: Number($('.lng').eq(index).text())
+    }
+    locationsArray.push(latLngObj)
+    })
+    return locationsArray
+}
+
+
+
     function initMap(){
+        let latLongData = grabData()
         let options = {
             zoom:8,
             center: {lat:41.6032, lng:-73.0877}
@@ -42,13 +72,23 @@
         let map = new google.maps.Map(document.getElementById('map'), options);
         console.log('hi')
         
-        let marker = new google.maps.Marker({
-            position: getLatLng(),
-            map:map
+   
+
+        function addMarker(coords){
+            let marker = new google.maps.Marker({
+                position:coords,
+                map:map
+            })
+        }
+        latLongData.forEach(pin=>{
+            addMarker({lat:pin.lat, lng: pin.lng})
         })
-
-
+        // addMarker({lat: 42.5, lng:-72.5})
+        // addMarker({lat: 42.7, lng:-71.8})
+        // addMarker({lat: 42.9, lng:-72.3})
+       
     }
+
 
     function getLatLng() {
         console.log('hi')
@@ -61,17 +101,7 @@
     }
 
 
-    // console.log(mapLocations)
-
-    // const $lat = $('.lat')
-    // const $lng = $('.lng')
-
-
-    // location = {lat: lat, lng: lng};
-    // var marker = new google.maps.Marker({
-    //       position: location,
-    //       map: map
-    //     });
+ 
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8-Zm5IHmTQpiH8u5LlokQOhhzn_GJGig&callback=initMap" async defer></script>

@@ -66,14 +66,36 @@ app.get('/' , (req, res) => {
   res.send('Live-Local App');
 });
 
+
 app.get('/map', (req, res) => {
-   res.render('map.ejs', {
-       mapLocations: [{
-           lat: 43,
-           lng: -72
-       }]
-   });
-  })
+    Event.find( (error, allLocations)=>{
+        console.log(allLocations)
+        if(error) {
+          res.status(418).json({"myerror": error})
+        }
+        res.render('map.ejs', {
+            locations: allLocations
+        });
+    });
+   })
+
+
+// app.get('/map', (req, res) => {
+//    res.render('map.ejs', {
+//        mapLocations: [{
+//            lat: 43,
+//            lng: -72
+//        },
+//        {
+//         lat: 42,
+//         lng: -73
+//     },
+//     {
+//         lat: 42,
+//         lng: -72
+//     }]
+//    });
+//   })
 
 app.get('/list', (req, res) => {
     Event.find( (error, allEvents)=>{
