@@ -13,6 +13,10 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <nav>
@@ -22,6 +26,13 @@
     <div id="map">
 
     </div>
+    <div class = "locations">
+        <li class="testing">Testing</li>
+        <li class="lat"><%=mapLocations[0].lat%></li>
+        <li class="lng"><%=mapLocations[0].lng%></li>
+    </div>
+ 
+
 <script>
     function initMap(){
         let options = {
@@ -29,12 +40,39 @@
             center: {lat:41.6032, lng:-73.0877}
         }
         let map = new google.maps.Map(document.getElementById('map'), options);
-
+        console.log('hi')
+        
         let marker = new google.maps.Marker({
-            position: {lat:41.8976, lng:-71.9626},
+            position: getLatLng(),
             map:map
         })
+
+
     }
+
+    function getLatLng() {
+        console.log('hi')
+        const lat = Number($('.lat').text())
+        const lng = Number($('.lng').text())
+        return {
+            lat:lat,
+            lng: lng
+        }
+    }
+
+
+    // console.log(mapLocations)
+
+    // const $lat = $('.lat')
+    // const $lng = $('.lng')
+
+
+    // location = {lat: lat, lng: lng};
+    // var marker = new google.maps.Marker({
+    //       position: location,
+    //       map: map
+    //     });
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8-Zm5IHmTQpiH8u5LlokQOhhzn_GJGig&callback=initMap" async defer></script>
 </body>

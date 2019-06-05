@@ -67,7 +67,12 @@ app.get('/' , (req, res) => {
 });
 
 app.get('/map', (req, res) => {
-   res.render('map.ejs');
+   res.render('map.ejs', {
+       mapLocations: [{
+           lat: 43,
+           lng: -72
+       }]
+   });
   })
 
 app.get('/list', (req, res) => {
@@ -93,10 +98,21 @@ app.post('/', (req, res) => {
         if (error) {
             res.send(error)
         } else {
-            res.redirect('/');
+            res.redirect('/map');
         }
     });
   })
+
+
+// Delete
+app.delete('/list/:id', (req, res) => {
+    console.log(typeof(req.params.id))
+    Event.findByIdAndRemove(Number(req.params.id), (err, deletedEvent)=>{
+        
+        res.redirect('/list');
+    });
+  })
+
 
 //___________________
 //Listener
