@@ -48,14 +48,14 @@ const newEvents = require('./models/seed.js')
 const Event = require('./models/model.js')
 
 //Populating seed Data
-// app.get('/seed', async (req, res) => {
-//   try {
-//     const seedEvents = await Event.create(newEvents)
-//     res.send(seedEvents)
-//   } catch (err) {
-//     res.send(err.message)
-//   }
-// })
+app.get('/seed', async (req, res) => {
+  try {
+    const seedEvents = await Event.create(newEvents)
+    res.send(seedEvents)
+  } catch (err) {
+    res.send(err.message)
+  }
+})
 
 //___________________
 // Routes
