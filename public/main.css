@@ -13,11 +13,13 @@ body {
 }
 
 h1 {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    padding: 20px;
 }
 
 .card {
-    margin: 10px auto;
+    margin: 0 auto;
+    margin-bottom: 20px;
     height: 350px;
 }
 
@@ -63,3 +65,10 @@ h1 {
     border: 0px;
     background-color: transparent;
     }
+
+.locations {
+    height: 40px;
+    overflow-y: hidden;
+    color: transparent;
+}
+
