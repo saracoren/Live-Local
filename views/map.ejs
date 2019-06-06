@@ -34,6 +34,8 @@
                     <tr>
                       <td class="lat"><%=data.lat_in%></td>
                       <td class="lng"><%=data.lng_in%></td> 
+                      <td class="title"><%=data.title%></td>
+                      <td class="date"><%=data.date%></td>
                     </tr>
                 <%})%>
             </table>     
@@ -49,6 +51,33 @@
 //   $latObj[5].forEach(function(element) {
 //   console.log(element);
 // });
+
+// Practice getting an info window to show for 1 hardcoded pin
+// function initMap(){
+//     let options = {
+//         zoom: 8,
+//         center: {lat:41.6032, lng:-73.0877}
+//     }
+
+//     let map = new google.maps.Map(document.getElementById('map'), options)
+
+//     let marker = new google.maps.Marker({
+//         position: {lat: 42.5, lng:-72.5},
+//         map:map
+//     })
+
+//     let infoWindow = new google.maps.InfoWindow({
+//         content: '<h1>Testing</h1>'
+//     })
+
+//     marker.addListener('click', function(){
+//         infoWindow.open(map, marker)
+//     })
+// }
+
+
+
+
 function grabData() {
     // an array of objects with lat and lng coordinates
     const locationsArray = []
@@ -59,16 +88,31 @@ function grabData() {
     // creating an object with lat and lng variables that are taking the text of each item with .lat class or .lng class and turning it into a number
     const latLngObj = {
         lat: Number($('.lat').eq(index).text()),
-        lng: Number($('.lng').eq(index).text())
+        lng: Number($('.lng').eq(index).text()),
+        title: ($('.title').eq(index).text()),
+        date: ($('.date').eq(index).text())
     }
     // pushing each lat and lng object into the locationsArray
     locationsArray.push(latLngObj)
     })
     // saving the locationsArray inside the grabData function (to be used below)
+    console.log(locationsArray)
     return locationsArray
 }
 
-
+// function grabContent(){
+//     const windowArray = []
+//     $('tr').each(function(index){
+//         console.log(index + ' title: ' + $('.title').eq(index).text()) 
+//         console.log(index + ' date: ' + $('.date').eq(index).text())  
+//         let title = ($('.title').eq(index).text())
+//         let date = ($('.date').eq(index).text())
+//         let contentString = 'title' +
+//                 '<h2>date</h2>'
+//     windowArray.push(windowObj)
+//     })
+//     return windowArray
+// }
 
     function initMap(){
         // set a variable equal to the grabData function that represents all of the lat lng objects pushed into the locationsArray
@@ -82,20 +126,60 @@ function grabData() {
         
    
 
-        function addMarker(coords){
+        // function addMarker(coords){
+        function addMarker(props){
             let marker = new google.maps.Marker({
-                position:coords,
+                // position:coords,
+                position: props.coords,
                 map:map
+            })
+            // let contentString = '<h1>Title</h1>' +
+            //     '<h2>Date</h2>'
+
+            let infoWindow = new google.maps.InfoWindow({
+                // content: '<h1>Hi</h1>'
+                content: props.content
+            })
+            marker.addListener('click', function(){
+                infoWindow.open(map, marker)
             })
         }
         // looping over the latLongData which is equal to the grabData function which has saved all of the lat long objects pushed into the locationsArray.  I.e. basically looping over the array of objects made up of lat and lng values
-        latLongData.forEach(pin=>{
-            addMarker({lat:pin.lat, lng: pin.lng})
+
+        latLongData.forEach(pin => {
+
+            addMarker(
+                {
+                    coords: {lat: pin.lat, lng: pin.lng},
+                    content: `
+                                <h3>${pin.title}</h3>
+                                <h5>${pin.date}</h5>   
+                            `
+                }
+
+                )
         })
+        // addMarker(
+        //         {
+        //             coords: {lat: 42.5, lng: -73},
+        //             content: `<h1>${'pin.title'}</h1>`
+        //         }
+        // )
         // hardcoded data used initially
-        // addMarker({lat: 42.5, lng:-72.5})
-        // addMarker({lat: 42.7, lng:-71.8})
-        // addMarker({lat: 42.9, lng:-72.3})
+    //     addMarker(
+    //     {
+    //         coords: {lat: 42.5, lng:-72.5},
+    //         content: '<h1>Title 1</h1>'
+    //     }
+    // )
+    //     addMarker({
+    //         coords: {lat: 42.7, lng:-71.8},
+    //         content: '<h1>Title 2</h1>'
+    // })
+    //     addMarker({
+    //         coords: {lat: 42.9, lng:-72.3},
+    //         content: '<h1>Title 3</h1>'
+    //     })
        
     }
 
