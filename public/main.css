@@ -51,24 +51,21 @@ h1 {
     overflow: auto;
 }
 
-/* form:hover { 
-    opacity: 0.5;
-    transition: .1s;
-    } */
-    input:hover {
-    cursor: pointer;
-    opacity: 0.5;
-    transition: .1s;
-    }
-    input[type= submit] {
+input[type= submit] {
     color: #007bff;
     border: 0px;
     background-color: transparent;
-    }
-
-/* .locations {
+}
+input[type= submit]:hover {
+    color: navy;
+    text-decoration: underline;
+}
+.locations {
     height: 40px;
     overflow-y: hidden;
     color: transparent;
-} */
-
+}
+.conversion-link {
+    padding: 10px;
+    background: rgb(161, 217, 255);
+}

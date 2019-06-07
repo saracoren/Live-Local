@@ -36,6 +36,9 @@
                       <td class="lng"><%=data.lng_in%></td> 
                       <td class="title"><%=data.title%></td>
                       <td class="date"><%=data.date%></td>
+                      <td class="time"><%=data.time%></td>
+                      <td class="location"><%=data.location%></td>
+                      <td class="details"><%=data.details%></td>
                     </tr>
                 <%})%>
             </table>     
@@ -90,7 +93,10 @@ function grabData() {
         lat: Number($('.lat').eq(index).text()),
         lng: Number($('.lng').eq(index).text()),
         title: ($('.title').eq(index).text()),
-        date: ($('.date').eq(index).text())
+        date: ($('.date').eq(index).text()), 
+        time: ($('.time').eq(index).text()),
+        location: ($('.location').eq(index).text()),
+        details: ($('.details').eq(index).text())
     }
     // pushing each lat and lng object into the locationsArray
     locationsArray.push(latLngObj)
@@ -152,8 +158,11 @@ function grabData() {
                 {
                     coords: {lat: pin.lat, lng: pin.lng},
                     content: `
-                                <h3>${pin.title}</h3>
-                                <h5>${pin.date}</h5>   
+                                <h5>${pin.title}</h5>
+                                <h6>${pin.date}</h6>
+                                <h6>${pin.time}</h6>
+                                <h6>${pin.location}</h6> 
+                                <p>${pin.details}</p>
                             `
                 }
 

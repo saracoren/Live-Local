@@ -99,7 +99,7 @@ app.get('/map', (req, res) => {
 
 app.get('/list', (req, res) => {
     Event.find( (error, allEvents)=>{
-        // console.log(allItems)
+        // console.log(typeof(allEvents[0]._id))
         if(error) {
           res.status(418).json({"myerror": error})
         }
@@ -126,14 +126,24 @@ app.post('/', (req, res) => {
   })
 
 
-// Delete
+// Delete 
 app.delete('/list/:id', (req, res) => {
-    console.log(typeof(req.params.id))
-    Event.findByIdAndRemove(Number(req.params.id), (err, deletedEvent)=>{
-        
+    console.log(req.params.id)
+    Event.findByIdAndRemove(req.params.id, (err, deletedEvent)=>{
+        console.log(deletedEvent)
         res.redirect('/list');
     });
   })
+
+
+// // Delete
+// app.delete('/list/:id', (req, res) => {
+//     console.log(typeof(req.params.id))
+//     Event.findByIdAndRemove(Number(req.params.id), (err, deletedEvent)=>{
+        
+//         res.redirect('/list');
+//     });
+//   })
 
 
 //___________________
