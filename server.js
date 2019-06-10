@@ -62,12 +62,12 @@ const Event = require('./models/model.js')
 //___________________
 //localhost:3000
 
-app.get('/' , (req, res) => {
-  res.send('Live-Local App');
-});
+// app.get('/' , (req, res) => {
+//   res.send('Live-Local App');
+// });
 
 
-app.get('/map', (req, res) => {
+app.get('/', (req, res) => {
     Event.find( (error, allLocations)=>{
         console.log(allLocations)
         if(error) {
@@ -120,7 +120,7 @@ app.post('/', (req, res) => {
         if (error) {
             res.send(error)
         } else {
-            res.redirect('/map');
+            res.redirect('/');
         }
     });
   })
